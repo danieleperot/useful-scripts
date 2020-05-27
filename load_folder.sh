@@ -1,10 +1,19 @@
 #!/usr/bin/zsh
 
 function main_echo {
-  echo "******************************"
-  echo "*      CHECKING PROJECT      *"
-  echo "*               by Nodopiano *"
-  echo "*****************************"
+  echo "**********************************"
+  echo "*        CHECKING PROJECT        *"
+  echo "*              by Daniele Perot  *"
+  echo "**********************************"
+}
+
+function is_running {
+  container=`$1 ps -q | wc -l`
+  if [[ $container -eq 0 ]]; then
+    return 1
+  else
+    return 0
+  fi
 }
 
 function node_echo {
@@ -28,13 +37,21 @@ function load_node {
 
 function load_vessel {
   if test -f "vessel"; then
-    echo -ne "$fg[yellow]\u2742 $reset_color\tVessel found\n"
+	color='red'
+	if is_running ./vessel; then
+	  color='green'
+	fi
+    echo -ne "$fg[$color]\u2742 $reset_color\tVessel found\n"
   fi
 }
 
 function load_kayak {
   if test -f "kayak"; then
-    echo -ne "$fg[yellow]\u2742 $reset_color\tKayak found\n"
+	color='red'
+	if is_running ./kayak; then
+	  color='green'
+	fi
+    echo -ne "$fg[$color]\u2742 $reset_color\tKayak found\n"
   fi
 }
 
@@ -48,6 +65,10 @@ function load_docker_compose {
   fi
 
   if test -f "docker-compose.yml"; then
+	color='red'
+	if is_running docker-compose; then
+	  color='green'
+	fi
     echo -ne "$fg[yellow]\u2742 $reset_color\tDocker Compose found\n"
   fi
 }
