@@ -74,9 +74,9 @@ function load_docker_compose {
 }
 
 function load_all {
-  load_vessel
-  load_kayak
-  load_docker_compose
+  # load_vessel
+  # load_kayak
+  # load_docker_compose
   load_node
 }
 
@@ -84,5 +84,5 @@ function chpwd {
   load_all
 }
 
-main_echo
+# main_echo
 load_all
