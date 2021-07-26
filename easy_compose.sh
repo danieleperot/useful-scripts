@@ -1,6 +1,11 @@
 #!/usr/bin/zsh
 
 function start {
+  if test -f "vendor/bin/sail"; then
+    ./vendor/bin/sail up -d
+    return
+  fi
+
   if test -f "kayak"; then
     kayak start
     return
@@ -20,6 +25,11 @@ function start {
 }
 
 function stop {
+  if test -f "vendor/bin/sail"; then
+    ./vendor/bin/sail down
+    return
+  fi
+
   if test -f "kayak"; then
     kayak stop
     return
