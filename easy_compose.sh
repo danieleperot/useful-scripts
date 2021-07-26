@@ -6,6 +6,11 @@ function start {
     return
   fi
 
+  if test -f "vendor/bin/sail"; then
+    ./vendor/bin/sail up -d
+    return
+  fi
+
   if test -f "vessel"; then
     vessel start
     return
@@ -20,6 +25,11 @@ function stop {
     return
   fi
 
+  if test -f "vendor/bin/sail"; then
+    ./vendor/bin/sail stop
+    return
+  fi
+
   if test -f "vessel"; then
     vessel stop
     return
@@ -31,6 +41,11 @@ function stop {
 function dps {
   if test -f "kayak"; then
     kayak ps
+    return
+  fi
+
+  if test -f "vendor/bin/sail"; then
+    ./vendor/bin/sail ps
     return
   fi
 
